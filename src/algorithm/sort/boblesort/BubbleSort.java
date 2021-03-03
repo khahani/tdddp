@@ -1,7 +1,10 @@
 package algorithm.sort.boblesort;
 
-public class BobleSort {
+public class BubbleSort {
 
+  /*
+    Bubble sort is quadratic O(nn)
+   */
   public void sort(int[] array) {
     for (int lastUnsortedIndex = array.length - 1; lastUnsortedIndex > 0; lastUnsortedIndex--) {
       for (int i = 0; i < lastUnsortedIndex; i++) {
