@@ -3,7 +3,7 @@ package algorithm.sort.boblesort;
 public class BubbleSort {
 
   /*
-    Bubble sort is quadratic O(nn)
+    Bubble sort is quadratic O(nn)/ O of n squared
    */
   public void sort(int[] array) {
     for (int lastUnsortedIndex = array.length - 1; lastUnsortedIndex > 0; lastUnsortedIndex--) {
