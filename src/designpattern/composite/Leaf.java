@@ -1,4 +1,4 @@
-package composite;
+package designpattern.composite;
 
 public class Leaf extends Branch {
 
@@ -9,7 +9,7 @@ public class Leaf extends Branch {
     public String describe(int depth) {
         if (color == null || color.isEmpty())
             return "";
-        return "-".repeat(depth) + color;
+        return new String(new char[depth]).replace("\0", "-") + color;
     }
 
     @Override

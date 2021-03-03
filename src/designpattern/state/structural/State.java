@@ -1,4 +1,4 @@
-package state.structural;
+package designpattern.state.structural;
 
 public abstract class State {
     String name;

@@ -1,4 +1,4 @@
-package state.structural;
+package designpattern.state.structural;
 
 import org.junit.Assert;
 import org.junit.Test;

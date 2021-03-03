@@ -1,4 +1,4 @@
-package composite;
+package designpattern.composite;
 
 public class Client {
     public static void main(String[] args) {

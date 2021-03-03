@@ -1,4 +1,4 @@
-package state.structural;
+package designpattern.state.structural;
 
 public class RedState extends SilverState {
     RedState() {

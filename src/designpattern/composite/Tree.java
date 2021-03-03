@@ -1,4 +1,4 @@
-package composite;
+package designpattern.composite;
 
 public abstract class Tree {
     String color;

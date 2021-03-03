@@ -1,4 +1,4 @@
-package composite;
+package designpattern.composite;
 
 
 import org.junit.Assert;

@@ -1,4 +1,4 @@
-package composite;
+package designpattern.composite;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class Branch extends Tree {
     public String describe(int depth) {
 
         StringBuilder descBuilder = new StringBuilder();
-        String line = "*".repeat(depth);
+        String line = new String(new char[depth]).replace("\0", "*");
         descBuilder.append(line).append(color).append("\n");
 
         if (!children.isEmpty())
