@@ -1,19 +1,20 @@
 package algorithm.sort.insertionsort;
 
+import algorithm.sort.SortStub;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class InsertionSortTest {
+public class InsertionSortTest extends SortStub {
 
   @Test
   public void sort() {
-    int[] array = new int[]{15, 1, -22, 20, -9, 2};
-    int[] expected = new int[]{-22, -9, 1, 2, 15, 20};
+
+    int[] array = getUnsorted();
 
     InsertionSort insertion = new InsertionSort();
     insertion.sort(array);
 
-    Assert.assertArrayEquals(expected, array);
+    Assert.assertArrayEquals(getSorted(), array);
 
   }
 }

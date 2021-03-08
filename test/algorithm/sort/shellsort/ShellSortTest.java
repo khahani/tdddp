@@ -1,18 +1,18 @@
 package algorithm.sort.shellsort;
 
+import algorithm.sort.SortStub;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ShellSortTest {
+public class ShellSortTest extends SortStub {
   @Test
   public void sort() {
-    int[] array = new int[]{15, 1, -22, 20, -9, 2};
-    int[] expected = new int[]{-22, -9, 1, 2, 15, 20};
+    int[] array = getUnsorted();
 
     ShellSort ss = new ShellSort();
     ss.sort(array);
 
-    Assert.assertArrayEquals(expected, array);
+    Assert.assertArrayEquals(getSorted(), array);
 
   }
 }
