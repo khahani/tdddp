@@ -5,6 +5,8 @@ import algorithm.sort.SortAlg;
 /*
     Proposition: Selection sort uses (N-1)+(N-2)+...+2+1+0~ N^2/2 compares
     and N exchanges.
+    Running time insensitive to input: Quadratic time, even if input is sorted.
+    Data movement is minimal: Linear number of exchange
  */
 public class Selection extends SortAlg {
 
