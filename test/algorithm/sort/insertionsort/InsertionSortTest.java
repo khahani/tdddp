@@ -9,7 +9,7 @@ public class InsertionSortTest extends SortStub {
   @Test
   public void sort() {
 
-    int[] array = getUnsorted();
+    Integer[] array = getUnsorted();
 
     InsertionSort insertion = new InsertionSort();
     insertion.sort(array);

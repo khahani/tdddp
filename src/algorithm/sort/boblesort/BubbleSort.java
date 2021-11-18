@@ -5,7 +5,7 @@ public class BubbleSort {
   /*
     Bubble sort is quadratic O(nn)/ O of n squared
    */
-  public void sort(int[] array) {
+  public void sort(Integer[] array) {
     for (int lastUnsortedIndex = array.length - 1; lastUnsortedIndex > 0; lastUnsortedIndex--) {
       for (int i = 0; i < lastUnsortedIndex; i++) {
         if (shouldSwap(array, i))
@@ -14,11 +14,11 @@ public class BubbleSort {
     }
   }
 
-  private boolean shouldSwap(int[] array, int i) {
+  private boolean shouldSwap(Integer[] array, int i) {
     return array[i] > array[i + 1];
   }
 
-  private void swap(int[] array, int i, int j) {
+  private void swap(Integer[] array, int i, int j) {
     if (array[i] == array[j])
       return;
 

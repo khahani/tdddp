@@ -7,7 +7,7 @@ import org.junit.Test;
 public class ShellSortTest extends SortStub {
   @Test
   public void sort() {
-    int[] array = getUnsorted();
+    Integer[] array = getUnsorted();
 
     ShellSort ss = new ShellSort();
     ss.sort(array);

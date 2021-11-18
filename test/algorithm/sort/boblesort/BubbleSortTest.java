@@ -9,7 +9,7 @@ public class BubbleSortTest extends SortStub {
   @Test
   public void sort() {
 
-    int[] array = getUnsorted();
+    Integer[] array = getUnsorted();
 
     BubbleSort bs = new BubbleSort();
     bs.sort(array);
