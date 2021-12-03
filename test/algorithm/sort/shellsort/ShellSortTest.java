@@ -10,7 +10,7 @@ public class ShellSortTest extends SortStub {
     Integer[] array = getUnsorted();
 
     ShellSort ss = new ShellSort();
-    ss.sort(array);
+    ss.sort((Comparable[]) array);
 
     Assert.assertArrayEquals(getSorted(), array);
 
