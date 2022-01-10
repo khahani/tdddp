@@ -1,4 +1,4 @@
-package algorithm.percolation;
+package algorithm.percolation.assignment;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
