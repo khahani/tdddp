@@ -1,6 +1,8 @@
 package algorithm.stack;
 
-public class LinkedStack<T> {
+import java.util.Iterator;
+
+public class LinkedStack<T> implements Iterable<T> {
     private Node first;
 
     public static void main(String[] args) {
@@ -55,8 +57,30 @@ public class LinkedStack<T> {
         return item;
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new LinkedStackIterator();
+    }
+
     private class Node {
         T item;
         Node next;
+    }
+
+    private class LinkedStackIterator implements Iterator<T> {
+
+        private Node current = first;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            T item = current.item;
+            current = current.next;
+            return item;
+        }
     }
 }
