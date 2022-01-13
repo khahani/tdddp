@@ -1,6 +1,8 @@
 package algorithm.stack;
 
-public class ResizingArrayStack<T> {
+import java.util.Iterator;
+
+public class ResizingArrayStack<T> implements Iterable<T> {
 
     private T[] array;
     private int offset;
@@ -34,8 +36,20 @@ public class ResizingArrayStack<T> {
         System.out.println(stack.pop());
         System.out.println(stack.pop());
 
+
+
         for (int i = 0; i < 100; i++) {
             stack.push("#" + i + "Hello");
+        }
+
+        for (String s :
+                stack) {
+            System.out.println("Foreach: " + s);
+        }
+
+        final Iterator<String> iterator = stack.iterator();
+        while(iterator.hasNext()){
+            System.out.println("Iterator: "+ iterator.next());
         }
 
         for (int i = 0; i < 100; i++) {
@@ -71,4 +85,25 @@ public class ResizingArrayStack<T> {
             resize(array.length / 2);
         return item;
     }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ReverseArrayIterator();
+    }
+
+    private class ReverseArrayIterator implements Iterator<T>{
+
+        private int i = offset;
+
+        @Override
+        public boolean hasNext() {
+            return i > 0;
+        }
+
+        @Override
+        public T next() {
+            return array[--i];
+        }
+    }
+
 }
