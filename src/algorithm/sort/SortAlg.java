@@ -12,9 +12,14 @@ public abstract class SortAlg implements Sortable {
         a[j] = swap;
     }
 
-    public static boolean isSorted(Comparable a[]) {
-        for (int i = 1; i < a.length; i++)
+    public static boolean isSorted(Comparable a[], int lo, int hi) {
+        for (int i = lo + 1; i < hi; i++)
             if (less(a[i], a[i - 1])) return false;
         return true;
+    }
+
+    public static void main(String[] args) {
+        Integer[] a = {-4, -1, 2, 3, 4};
+        System.out.println(isSorted(a, 0, a.length));
     }
 }
