@@ -2,6 +2,8 @@ package algorithm.sort.selectionsort;
 
 import algorithm.sort.SortAlg;
 
+import java.util.Arrays;
+
 /*
     Proposition: Selection sort uses (N-1)+(N-2)+...+2+1+0~ N^2/2 compares
     and N exchanges.
@@ -20,5 +22,11 @@ public class Selection extends SortAlg {
                     min = j;
             exch(a, i, min);
         }
+    }
+
+    public static void main(String[] args) {
+        Integer[] array = {4, 5, 2, -1, 0, 8};
+        new Selection().sort(array);
+        Arrays.asList(array).forEach(System.out::println);
     }
 }

@@ -2,6 +2,8 @@ package algorithm.sort.shellsort;
 
 import algorithm.sort.SortAlg;
 
+import java.util.Arrays;
+
 public class ShellSort extends SortAlg {
 
     public void sort(Integer[] array) {
@@ -36,5 +38,11 @@ public class ShellSort extends SortAlg {
             h = h / 3;
         }
 
+    }
+
+    public static void main(String[] args) {
+        Integer[] array = {4, 5, 2, -1, 0, 8};
+        new ShellSort().sort(array);
+        Arrays.asList(array).forEach(System.out::println);
     }
 }

@@ -2,6 +2,8 @@ package algorithm.sort.insertionsort;
 
 import algorithm.sort.SortAlg;
 
+import java.util.Arrays;
+
 /*
     Preposition: To sort a randomly-ordered array with distinct keys,
     insertion sort uses ~1/4 N^2 compares, and ~1/4 N^2 exchanges on average.
@@ -33,5 +35,12 @@ public class InsertionSort extends SortAlg {
                     exch(a, j, j - 1);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        Integer[] array = {4, 5, 2, -1, 0, 8};
+        InsertionSort o = new InsertionSort();
+        o.sort(array);
+        Arrays.asList(array).forEach(System.out::println);
     }
 }
