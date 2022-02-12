@@ -1,4 +1,4 @@
-package algorithm.sort.mergesort;
+package algorithm.sort.mergesorts;
 
 import algorithm.sort.SortAlg;
 

@@ -1,4 +1,4 @@
-package algorithm.sort.mergesort.interviewquestion;
+package algorithm.sort.mergesorts.interviewquestion;
 
 import java.util.Arrays;
 

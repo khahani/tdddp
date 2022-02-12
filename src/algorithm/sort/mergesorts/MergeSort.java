@@ -1,8 +1,9 @@
-package algorithm.sort.mergesort;
+package algorithm.sort.mergesorts;
 
 import algorithm.sort.SortAlg;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class MergeSort extends SortAlg {
 
@@ -46,11 +47,47 @@ public class MergeSort extends SortAlg {
         assert isSorted(a, lo, hi);
     }
 
+    private void merge(Object[] a, Object[] aux, Comparator c, int lo, int mid, int hi) {
+        assert isSorted(c, a, lo, mid);
+        assert isSorted(c, a, mid + 1, hi);
+
+        for (int k = lo; k <= hi; k++)
+            aux[k] = a[k];
+
+        int i = lo;
+        int j = mid + 1;
+        for (int k = lo; k <= hi; k++) {
+            if (i > mid)
+                a[k] = aux[j++];
+            else if (j > hi)
+                a[k] = aux[i++];
+            else if (less(c, aux[j], aux[i]))
+                a[k] = aux[j++];
+            else
+                a[k] = aux[i++];
+        }
+
+        assert isSorted(c, a, lo, hi);
+    }
+
 
     @Override
     public void sort(Comparable[] a) {
         Comparable[] aux = new Comparable[a.length];
         sort(a, aux, 0, a.length - 1);
+    }
+
+    public void sort(Object[] a, Comparator c) {
+        Object[] aux = new Object[a.length];
+        sort(a, aux, c, 0, a.length - 1);
+    }
+
+    private void sort(Object[] a, Object[] aux, Comparator c, int lo, int hi) {
+        if (lo >= hi) return;
+        int mid = lo + (hi - lo) / 2;
+        sort(a, aux, c, lo, mid);
+        sort(a, aux, c, mid + 1, hi);
+        merge(a, aux, c, lo, mid, hi);
     }
 
     private void sort(Comparable[] a, Comparable[] aux, int lo, int hi) {
