@@ -1,5 +1,7 @@
 package algorithm.priorityqueue;
 
+import edu.princeton.cs.algs4.StdIn;
+
 public class UnorderedMaxPQ<Key extends Comparable<Key>> {
     private Key[] pq;
     private int n;
@@ -9,6 +11,32 @@ public class UnorderedMaxPQ<Key extends Comparable<Key>> {
     }
 
     public static void main(String[] args) {
+        firstExample();
+        findNthMinValuesInHugeInputExample(args, 5);
+    }
+
+    private static void findNthMinValuesInHugeInputExample(String[] args, final int nth) {
+        final class Transaction implements Comparable<Transaction> {
+            public Transaction(String line) {
+                //do some work
+            }
+
+            public int compareTo(Transaction o) {
+                return 0;
+            }
+        }
+
+        UnorderedMaxPQ<Transaction> pq = new UnorderedMaxPQ<>();
+        while (StdIn.hasNextLine()) {
+            String line = StdIn.readLine();
+            Transaction item = new Transaction(line);
+            pq.insert(item);
+            if (pq.size() > nth)
+                pq.delMax();
+        }
+    }
+
+    private static void firstExample() {
         UnorderedMaxPQ<String> pq = new UnorderedMaxPQ<>();
         pq.insert("P");
         pq.insert("Q");
@@ -18,6 +46,10 @@ public class UnorderedMaxPQ<Key extends Comparable<Key>> {
         pq.insert("A");
         pq.insert("M");
         System.out.println(pq.delMax());
+    }
+
+    private int size() {
+        return n;
     }
 
     public boolean isEmpty() {
