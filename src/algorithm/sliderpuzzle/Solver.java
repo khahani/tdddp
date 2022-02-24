@@ -10,7 +10,6 @@ import java.util.Iterator;
 public class Solver {
 
     private final boolean isSolvable;
-    private SearchNode min;
     private SearchNode[] solutions;
 
     // find a solution to the initial board (using the A* algorithm)
@@ -18,25 +17,33 @@ public class Solver {
         if (null == initial)
             throw new IllegalArgumentException();
 
-        MinPQ<SearchNode> pqErr = new MinPQ<>();
-        pqErr.insert(new SearchNode(initial.twin(), 0, null));
         MinPQ<SearchNode> pq = new MinPQ<>();
         pq.insert(new SearchNode(initial, 0, null));
+        pq.insert(new SearchNode(initial.twin(), 0, null));
         int count = 0;
-        do {
-            if (solveIt(pq)) {
-                reconstructPath(this.min);
-                isSolvable = true;
+        while (!pq.isEmpty()) {
+            count++;
+            SearchNode min = pq.delMin();
+            if (min.item.isGoal()) {
+                reconstructPath(min);
                 break;
             }
-//            if (solveIt(pqErr)) {
-//                isSolvable = false;
-//                break;
-//            }
-            count++;
-        } while (true);
-        StdOut.println("Operatoin for constuction: " + count);
+
+            final Iterable<Board> neighbours = min.neighbors();
+            SearchNode pre = min.preview;
+            Board preBoard = (pre == null) ? null : pre.item;
+
+            for (Board board :
+                    neighbours) {
+                if (!board.equals(preBoard)) {
+                    pq.insert(new SearchNode(board, min.moves + 1, min));
+                }
+            }
+        }
+        System.out.println(count);
+        isSolvable = solutions[0].item.equals(initial);
     }
+
 
     // test client (see below)
     public static void main(String[] args) {
@@ -46,8 +53,9 @@ public class Solver {
         int n = in.readInt();
         int[][] tiles = new int[n][n];
         for (int i = 0; i < n; i++)
-            for (int j = 0; j < n; j++)
+            for (int j = 0; j < n; j++) {
                 tiles[i][j] = in.readInt();
+            }
         Board initial = new Board(tiles);
 
         // solve the puzzle
@@ -66,20 +74,21 @@ public class Solver {
         }
     }
 
-    private boolean solveIt(MinPQ<SearchNode> pq) {
-        SearchNode min = pq.delMin();
-        if (min.item.isGoal()) {
-            this.min = min;
-            return true;
-        }
-        for (Board neighbor :
-                min.item.neighbors()) {
-            if (null != min.preview && neighbor.equals(min.preview.item))
-                continue;
-            pq.insert(new SearchNode(neighbor, min.moves + 1, min));
-        }
-        return false;
-    }
+//    private boolean solveIt(MinPQ<SearchNode> pq) {
+//        SearchNode min = pq.delMin();
+//        if (min.item.isGoal()) {
+//            this.min = min;
+//            return true;
+//        }
+//        for (Board neighbor :
+//                min.item.neighbors()) {
+//            if (null != min.preview && neighbor.equals(min.preview.item)) {
+//                continue;
+//            }
+//            pq.insert(new SearchNode(neighbor, min.moves + 1, min));
+//        }
+//        return false;
+//    }
 
     private void reconstructPath(SearchNode min) {
         solutions = new SearchNode[min.moves + 1];
@@ -108,54 +117,45 @@ public class Solver {
         if (!isSolvable())
             return null;
 
-        return () -> new SolverIterator(solutions);
+        return SolverIterator::new;
     }
 
     private static class SearchNode implements Comparable<SearchNode> {
         private final Board item;
         private final int moves;
         private final SearchNode preview;
+        private final int priority;
 
         public SearchNode(Board item, int moves, SearchNode preview) {
             this.item = item;
             this.moves = moves;
             this.preview = preview;
-        }
-
-        public int hammingPriority() {
-            return item.hamming() + moves;
-        }
-
-        public int manhattanPriority() {
-            return item.manhattan() + moves;
+            this.priority = item.manhattan() + this.moves;
         }
 
         @Override
         public int compareTo(SearchNode that) {
-            return Integer.compare(this.hammingPriority(), that.hammingPriority());
+            return Integer.compare(this.priority, that.priority);
+        }
+
+        public Iterable<Board> neighbors() {
+            return item.neighbors();
         }
     }
 
-    private static class SolverIterator implements Iterator<Board> {
+    private class SolverIterator implements Iterator<Board> {
 
-        private final SearchNode[] path;
         private int step;
-
-        private SolverIterator(SearchNode[] path) {
-            final int n = path.length;
-            this.path = new SearchNode[n];
-            System.arraycopy(path, 0, this.path, 0, n);
-        }
 
         @Override
         public boolean hasNext() {
-            return step != path.length;
+            return step != solutions.length;
         }
 
         @Override
         public Board next() {
             if (!hasNext()) throw new EmptyStackException();
-            return path[step++].item;
+            return solutions[step++].item;
         }
     }
 
